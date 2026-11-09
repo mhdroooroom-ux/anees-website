@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANEES | أنت لست وحدك</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #F7F4ED;
+      color: #174C49;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+    }
+    .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+    button {
+      border: 0;
+      border-radius: 25px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .language { background: #E8F0EA; color: #174C49; }
+    main {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .content { max-width: 650px; }
+    .circle {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      background: #A9C5BC;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+    }
+    h1 { font-size: clamp(32px, 7vw, 52px); margin: 15px 0; }
+    p {
+      color: #536C66;
+      font-size: 19px;
+      line-height: 1.9;
+    }
+    .start {
+      background: #174C49;
+      color: white;
+      margin-top: 20px;
+      padding: 15px 32px;
+    }
+    .note {
+      font-size: 13px;
+      margin-top: 35px;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #E8F0EA;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ANEES</div>
+    <button class="language" onclick="toggleLanguage()">English</button>
+  </header>
+
+  <main>
+    <div class="content">
+      <div class="circle">♡</div>
+      <h1 id="title">أنت لست وحدك.</h1>
+      <p id="description">
+        أحياناً كل ما نحتاجه هو مساحة آمنة
+        لنعبّر عمّا بداخلنا دون خوف أو أحكام.
+        نحن هنا لنستمع إليك.
+      </p>
+      <button class="start" id="start"
+        onclick="alert('قريباً ستكون الدردشة متاحة.')">
+        ابدأ رحلتك
+      </button>
+      <p class="note" id="note">
+        ANEES مساحة دعم ومساندة، وليست بديلاً عن المساعدة المهنية أو الطوارئ.
+      </p>
+    </div>
+  </main>
+
+  <footer>ANEES © 2026 — أنت لست وحدك.</footer>
+
+  <script>
+    let arabic = true;
+
+    function toggleLanguage() {
+      arabic = !arabic;
+      document.documentElement.lang = arabic ? "ar" : "en";
+      document.documentElement.dir = arabic ? "rtl" : "ltr";
+      document.querySelector(".language").textContent =
+        arabic ? "English" : "العربية";
+      document.getElementById("title").textContent =
+        arabic ? "أنت لست وحدك." : "You Are Not Alone.";
+      document.getElementById("description").textContent =
+        arabic
+        ? "أحياناً كل ما نحتاجه هو مساحة آمنة لنعبّر عمّا بداخلنا دون خوف أو أحكام. نحن هنا لنستمع إليك."
+        : "Sometimes all we need is a safe space to express ourselves without fear or judgment. We are here to listen.";
+      document.getElementById("start").textContent =
+        arabic ? "ابدأ رحلتك" : "Start Your Journey";
+      document.getElementById("note").textContent =
+        arabic
+        ? "ANEES مساحة دعم ومساندة، وليست بديلاً عن المساعدة المهنية أو الطوارئ."
+        : "ANEES offers support and is not a substitute for professional or emergency help.";
+    }
+  </script>
+</body>
+</html>
