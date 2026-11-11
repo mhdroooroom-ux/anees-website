@@ -1,124 +1,139 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ANEES | أنت لست وحدك</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #F7F4ED;
-      color: #174C49;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 7%;
-    }
-    .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
-    button {
-      border: 0;
-      border-radius: 25px;
-      padding: 12px 20px;
-      cursor: pointer;
-      font-size: 15px;
-    }
-    .language { background: #E8F0EA; color: #174C49; }
-    main {
-      min-height: 75vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 50px 20px;
-    }
-    .content { max-width: 650px; }
-    .circle {
-      width: 85px;
-      height: 85px;
-      margin: 0 auto 25px;
-      border-radius: 50%;
-      background: #A9C5BC;
-      display: grid;
-      place-items: center;
-      font-size: 38px;
-    }
-    h1 { font-size: clamp(32px, 7vw, 52px); margin: 15px 0; }
-    p {
-      color: #536C66;
-      font-size: 19px;
-      line-height: 1.9;
-    }
-    .start {
-      background: #174C49;
-      color: white;
-      margin-top: 20px;
-      padding: 15px 32px;
-    }
-    .note {
-      font-size: 13px;
-      margin-top: 35px;
-    }
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #E8F0EA;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F7F4ED">
+<title>ANEES | أنت لست وحدك</title>
+<style>
+:root{--cream:#F7F4ED;--green:#174C49;--sage:#A9C5BC;--pale:#E8F0EA;--ink:#294D49;--muted:#63766F;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--cream);color:var(--green)}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:0}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 7%}
+.logo{font-size:28px;font-weight:bold;letter-spacing:2px}
+.language{background:var(--pale);color:var(--green);border-radius:25px;padding:12px 20px}
+main{min-height:75vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px}
+.content{max-width:650px}
+.circle{width:85px;height:85px;margin:0 auto 25px;border-radius:50%;background:var(--sage);display:grid;place-items:center;font-size:38px}
+h1{font-size:clamp(32px,7vw,52px);margin:15px 0}
+p{color:#536C66;font-size:19px;line-height:1.9}
+.start{background:var(--green);color:white;margin-top:20px;padding:17px 34px;border-radius:30px;font-size:18px}
+.note{font-size:13px;margin-top:35px}
+footer{text-align:center;padding:25px;background:var(--pale);font-size:13px}
+.chat-screen{display:none;min-height:calc(100vh - 145px);padding:18px 14px 26px}
+.chat-wrap{max-width:720px;margin:auto;background:#fff;border:1px solid #e3e9e2;border-radius:24px;overflow:hidden;box-shadow:0 8px 30px #174c4910}
+.chat-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:var(--pale);gap:12px}
+.chat-brand{font-weight:bold;font-size:20px}
+.chat-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.back{background:transparent;color:var(--green);font-size:15px;padding:8px}
+.messages{height:min(54vh,520px);min-height:300px;overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;background:#fff}
+.bubble{max-width:88%;padding:13px 15px;border-radius:18px;line-height:1.7;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.bot{align-self:flex-start;background:var(--pale);color:var(--ink);border-bottom-right-radius:5px}
+.user{align-self:flex-end;background:var(--green);color:white;border-bottom-left-radius:5px}
+.composer{display:flex;align-items:flex-end;gap:9px;padding:12px;border-top:1px solid #edf0eb;background:#fff}
+.composer textarea{flex:1;resize:none;min-height:46px;max-height:120px;border:1px solid #d8e2da;border-radius:16px;padding:12px;color:var(--green);background:#fcfdfb;outline:none}
+.composer textarea:focus{border-color:var(--sage)}
+.send{height:46px;min-width:58px;border-radius:15px;background:var(--green);color:white;padding:0 15px}
+.demo{padding:0 16px 15px;color:#75847e;font-size:11px;line-height:1.6;text-align:center}
+.hidden{display:none!important}
+@media(max-width:480px){header{padding:16px 5%}.chat-screen{padding:10px 8px 20px}.messages{height:55vh}.bubble{max-width:94%}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">ANEES</div>
-    <button class="language" onclick="toggleLanguage()">English</button>
-  </header>
+<header>
+  <div class="logo">ANEES</div>
+  <button class="language" id="languageBtn" type="button" onclick="toggleLanguage()">English</button>
+</header>
 
-  <main>
-    <div class="content">
-      <div class="circle">♡</div>
-      <h1 id="title">أنت لست وحدك.</h1>
-      <p id="description">
-        أحياناً كل ما نحتاجه هو مساحة آمنة
-        لنعبّر عمّا بداخلنا دون خوف أو أحكام.
-        نحن هنا لنستمع إليك.
-      </p>
-      <button class="start" id="start"
-        onclick="alert('قريباً ستكون الدردشة متاحة.')">
-        ابدأ رحلتك
-      </button>
-      <p class="note" id="note">
-        ANEES مساحة دعم ومساندة، وليست بديلاً عن المساعدة المهنية أو الطوارئ.
-      </p>
+<main id="home">
+  <div class="content">
+    <div class="circle">♡</div>
+    <h1 id="title">أنت لست وحدك.</h1>
+    <p id="description">أحياناً كل ما نحتاجه هو مساحة آمنة لنعبر عمّا بداخلنا دون خوف أو أحكام. نحن هنا لنستمع إليك.</p>
+    <button class="start" id="start" type="button" onclick="openChat()">ابدأ رحلتك</button>
+    <p class="note" id="note">ANEES مساحة دعم ومساندة، وليست بديلاً عن المساعدة المهنية أو الطوارئ.</p>
+  </div>
+</main>
+
+<section class="chat-screen" id="chatScreen">
+  <div class="chat-wrap">
+    <div class="chat-head">
+      <div>
+        <div class="chat-brand">ANEES ♡</div>
+        <div class="chat-sub" id="chatSubtitle">مساحة هادئة للحديث دون أحكام</div>
+      </div>
+      <button class="back" type="button" onclick="closeChat()" id="backBtn">← الرئيسية</button>
     </div>
-  </main>
+    <div class="messages" id="messages" aria-live="polite">
+      <div class="bubble bot" id="welcomeMessage">أهلاً بك. يمكنك أن تبدأ بالحديث عمّا يشغل بالك، أو تأخذ وقتك. أنا هنا لأستمع إليك دون أحكام.</div>
+    </div>
+    <form class="composer" id="chatForm">
+      <textarea id="messageInput" rows="1" placeholder="اكتب ما تود مشاركته..." aria-label="اكتب رسالتك"></textarea>
+      <button class="send" id="sendBtn" type="submit">إرسال</button>
+    </form>
+    <div class="demo" id="demoNotice">هذه معاينة أولية لواجهة المحادثة فقط. لم يتم ربط الذكاء الاصطناعي بعد، ولا تُرسل رسائلك إلى خدمة محادثة.</div>
+  </div>
+</section>
 
-  <footer>ANEES © 2026 — أنت لست وحدك.</footer>
+<footer id="footer">ANEES © 2026 — أنت لست وحدك.</footer>
 
-  <script>
-    let arabic = true;
-
-    function toggleLanguage() {
-      arabic = !arabic;
-      document.documentElement.lang = arabic ? "ar" : "en";
-      document.documentElement.dir = arabic ? "rtl" : "ltr";
-      document.querySelector(".language").textContent =
-        arabic ? "English" : "العربية";
-      document.getElementById("title").textContent =
-        arabic ? "أنت لست وحدك." : "You Are Not Alone.";
-      document.getElementById("description").textContent =
-        arabic
-        ? "أحياناً كل ما نحتاجه هو مساحة آمنة لنعبّر عمّا بداخلنا دون خوف أو أحكام. نحن هنا لنستمع إليك."
-        : "Sometimes all we need is a safe space to express ourselves without fear or judgment. We are here to listen.";
-      document.getElementById("start").textContent =
-        arabic ? "ابدأ رحلتك" : "Start Your Journey";
-      document.getElementById("note").textContent =
-        arabic
-        ? "ANEES مساحة دعم ومساندة، وليست بديلاً عن المساعدة المهنية أو الطوارئ."
-        : "ANEES offers support and is not a substitute for professional or emergency help.";
-    }
-  </script>
+<script>
+let arabic=true;
+const translations={
+ ar:{
+  title:"أنت لست وحدك.",description:"أحياناً كل ما نحتاجه هو مساحة آمنة لنعبر عمّا بداخلنا دون خوف أو أحكام. نحن هنا لنستمع إليك.",
+  start:"ابدأ رحلتك",note:"ANEES مساحة دعم ومساندة، وليست بديلاً عن المساعدة المهنية أو الطوارئ.",
+  back:"الرئيسية ←",subtitle:"مساحة هادئة للحديث دون أحكام",welcome:"أهلاً بك. يمكنك أن تبدأ بالحديث عمّا يشغل بالك، أو تأخذ وقتك. أنا هنا لأستمع إليك دون أحكام.",
+  placeholder:"اكتب ما تود مشاركته...",send:"إرسال",demo:"هذه معاينة أولية لواجهة المحادثة فقط. لم يتم ربط الذكاء الاصطناعي بعد، ولا تُرسل رسائلك إلى خدمة محادثة.",
+  footer:"ANEES © 2026 — أنت لست وحدك.",empty:"اكتب رسالة أولاً."
+ },
+ en:{
+  title:"You Are Not Alone.",description:"Sometimes all we need is a safe space to express what is inside us without fear or judgment. We are here to listen.",
+  start:"Start Your Journey",note:"ANEES offers support and is not a substitute for professional or emergency help.",
+  back:"Home →",subtitle:"A calm space to talk without judgment",welcome:"Welcome. You can start by sharing what is on your mind, or take your time. I’m here to listen without judgment.",
+  placeholder:"Write what you would like to share...",send:"Send",demo:"This is an early preview of the chat interface only. AI is not connected yet, and your messages are not sent to a chat service.",
+  footer:"ANEES © 2026 — You Are Not Alone.",empty:"Please write a message first."
+ }
+};
+function setLanguage(){
+ const t=arabic?translations.ar:translations.en;
+ document.documentElement.lang=arabic?"ar":"en";
+ document.documentElement.dir=arabic?"rtl":"ltr";
+ document.getElementById("languageBtn").textContent=arabic?"English":"العربية";
+ ["title","description","start","note","back"].forEach(id=>document.getElementById(id).textContent=t[id]);
+ document.getElementById("chatSubtitle").textContent=t.subtitle;
+ document.getElementById("welcomeMessage").textContent=t.welcome;
+ document.getElementById("messageInput").placeholder=t.placeholder;
+ document.getElementById("sendBtn").textContent=t.send;
+ document.getElementById("demoNotice").textContent=t.demo;
+ document.getElementById("footer").textContent=t.footer;
+}
+function toggleLanguage(){arabic=!arabic;setLanguage()}
+function openChat(){document.getElementById("home").classList.add("hidden");document.getElementById("chatScreen").style.display="block";document.getElementById("messageInput").focus();window.scrollTo(0,0)}
+function closeChat(){document.getElementById("chatScreen").style.display="none";document.getElementById("home").classList.remove("hidden");window.scrollTo(0,0)}
+document.getElementById("chatForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const input=document.getElementById("messageInput");
+ const value=input.value.trim();
+ if(!value){input.focus();return}
+ const bubble=document.createElement("div");
+ bubble.className="bubble user";
+ bubble.textContent=value;
+ document.getElementById("messages").appendChild(bubble);
+ input.value="";
+ document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight;
+ const notice=document.createElement("div");
+ notice.className="bubble bot";
+ notice.textContent=arabic
+ ? "شكراً لمشاركتك. هذه الواجهة في مرحلة التجربة؛ لم يتم تفعيل الردود الذكية بعد. لن نعرض عليك رداً آلياً وكأنه دعم حقيقي قبل تجهيز نظام الذكاء الاصطناعي والأمان."
+ : "Thank you for sharing. This interface is in preview; intelligent replies are not enabled yet. We won't present an automated reply as real support before the AI and safety systems are ready.";
+ document.getElementById("messages").appendChild(notice);
+ document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight;
+});
+setLanguage();
+</script>
 </body>
 </html>
